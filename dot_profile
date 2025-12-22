@@ -1,0 +1,6 @@
+# Added by Toolbox App
+export PATH="$PATH:/home/tduckie/.local/share/JetBrains/Toolbox/scripts"
+
+# Config global NPM installs
+PATH="$HOME/.local/bin:$PATH"
+export npm_config_prefix="$HOME/.local"
