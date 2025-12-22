@@ -1,0 +1,60 @@
+{
+  "dankActions": {
+    "enabled": true
+  },
+  "dankPomodoroTimer": {
+    "enabled": true
+  },
+  "dankBatteryAlerts": {
+    "enabled": true
+  },
+  "pomodoroTimer": {
+    "autoStartBreaks": false,
+    "autoStartPomodoros": true
+  },
+  "webSearch": {
+    "enabled": true,
+    "trigger": "?",
+    "noTrigger": false,
+    "searchEngines": []
+  },
+  "emojiLauncher": {
+    "enabled": true
+  },
+  "dockerManager": {
+    "enabled": true
+  },
+  "grimblast": {
+    "enabled": true
+  },
+  "niriWindows": {
+    "enabled": true,
+    "trigger": "!",
+    "noTrigger": true
+  },
+  "wallpaperBing": {
+    "enabled": true
+  },
+  "wallpaperDiscovery": {
+    "enabled": false,
+    "lastWallpaperUsed": "unsplash",
+    "api_unsplash": "ZWZi1XeK0Oy1e4QqsoJ8izAOFmgMQ8YhKeDSh-qYGNo"
+  },
+  "easyEffects": {
+    "enabled": false,
+    "currentOutputIndex": -1,
+    "currentInputIndex": -1
+  },
+  "alarmClock": {
+    "enabled": true
+  },
+  "linuxWallpaperEngine": {
+    "enabled": false
+  },
+  "dankDesktopWeather": {
+    "enabled": true
+  },
+  "displayMirror": {
+    "enabled": true
+  }
+}
