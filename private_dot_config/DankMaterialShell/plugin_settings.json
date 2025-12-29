@@ -56,5 +56,8 @@
   },
   "displayMirror": {
     "enabled": true
+  },
+  "dankHooks": {
+    "enabled": true
   }
 }

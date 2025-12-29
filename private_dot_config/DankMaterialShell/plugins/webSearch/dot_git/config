@@ -1,5 +1,6 @@
 [core]
 	bare = false
+	filemode = true
 [remote "origin"]
 	url = https://github.com/devnullvoid/dms-web-search
 	fetch = +refs/heads/*:refs/remotes/origin/*

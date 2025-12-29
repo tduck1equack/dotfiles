@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Io
 import qs.Common
 import qs.Services
 import qs.Widgets
@@ -13,6 +14,7 @@ PluginComponent {
     property int longBreakDuration: pluginData.longBreakDuration || 15
     property bool autoStartBreaks: pluginData.autoStartBreaks ?? false
     property bool autoStartPomodoros: pluginData.autoStartPomodoros ?? false
+    property bool autoSetDND: pluginData.autoSetDND ?? false
 
     onWorkDurationChanged: {
         if (globalTimerState.value === "work" && globalTotalSeconds.value > 0) {
@@ -102,6 +104,9 @@ PluginComponent {
 
             Quickshell.execDetached(["sh", "-c", "notify-send 'Pomodoro Complete' 'Time for a " + (isLongBreak ? "long" : "short") + " break!' -u normal"])
 
+            if (root.autoSetDND) {
+              SessionData.setDoNotDisturb(false)
+            }
             if (isLongBreak) {
                 root.startLongBreak(root.autoStartBreaks)
             } else {
@@ -119,11 +124,18 @@ PluginComponent {
         globalRemainingSeconds.set(globalTotalSeconds.value)
         if (autoStart) {
             globalTimerOwnerId.set(root.instanceId)
+
+            if (root.autoSetDND) {
+                SessionData.setDoNotDisturb(true)
+            }
         }
         globalIsRunning.set(autoStart ?? false)
     }
 
     function startShortBreak(autoStart) {
+        if(globalTimerState.value === "work" && root.autoSetDND) {
+          SessionData.setDoNotDisturb(false)
+        }
         globalTimerState.set("shortBreak")
         globalTotalSeconds.set(root.shortBreakDuration * 60)
         globalRemainingSeconds.set(globalTotalSeconds.value)
@@ -134,6 +146,9 @@ PluginComponent {
     }
 
     function startLongBreak(autoStart) {
+        if(globalTimerState.value === "work" && root.autoSetDND) {
+          SessionData.setDoNotDisturb(false)
+        }
         globalTimerState.set("longBreak")
         globalTotalSeconds.set(root.longBreakDuration * 60)
         globalRemainingSeconds.set(globalTotalSeconds.value)
@@ -148,10 +163,16 @@ PluginComponent {
             globalTimerOwnerId.set(root.instanceId)
         }
         globalIsRunning.set(!globalIsRunning.value)
+        if (root.autoSetDND && globalTimerState.value === "work") {
+          SessionData.setDoNotDisturb(globalIsRunning.value)
+        }
     }
 
     function resetTimer() {
         globalIsRunning.set(false)
+        if (root.autoSetDND && globalTimerState.value === "work") {
+          SessionData.setDoNotDisturb(false)
+        }
         globalRemainingSeconds.set(globalTotalSeconds.value)
     }
 
@@ -172,6 +193,35 @@ PluginComponent {
         return "coffee"
     }
 
+    IpcHandler {
+      function resetTimer(): string {
+        root.resetTimer()
+        return "POMDORO_TIME_RESET_SUCCESS"
+      }
+
+      function toggleTimer(): string {
+        root.toggleTimer()
+        return globalIsRunning.value ? "Timer is running" : "Timer is paused"
+      }
+
+      function startWork(): string {
+        root.startWork(true)
+        return "POMODORO_WORK_STARTED"
+      }
+
+      function startShortBreak(): string {
+        root.startShortBreak(true)
+        return "POMODORO_SHORT_BREAK_STARTED"
+      }
+
+      function startLongBreak(): string {
+        root.startLongBreak(true)
+        return "POMODORO_LONG_BREAK_STARTED"
+      }
+
+      target: "pomodoroTimer"
+    }
+
     Timer {
         id: initTimer
         interval: 100
@@ -179,7 +229,7 @@ PluginComponent {
         running: true
         onTriggered: {
             if (globalRemainingSeconds.value === 0 && globalTotalSeconds.value === 0) {
-                startWork(false)
+                root.startWork(false)
             }
         }
     }

@@ -1,5 +1,6 @@
 [core]
 	bare = false
+	filemode = true
 [remote "origin"]
 	url = https://github.com/rochacbruno/DankNiriWindows
 	fetch = +refs/heads/*:refs/remotes/origin/*
