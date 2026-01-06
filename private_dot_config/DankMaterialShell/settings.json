@@ -113,10 +113,12 @@
     }
   ],
   "showWorkspaceIndex": false,
+  "showWorkspaceName": false,
   "showWorkspacePadding": true,
   "workspaceScrolling": false,
   "showWorkspaceApps": true,
   "maxWorkspaceIcons": 3,
+  "groupWorkspaceApps": true,
   "workspacesPerMonitor": true,
   "showOccupiedWorkspacesOnly": false,
   "reverseScrolling": false,
@@ -125,7 +127,7 @@
   "waveProgressEnabled": true,
   "scrollTitleEnabled": true,
   "audioVisualizerEnabled": true,
-  "audioScrollEnabled": true,
+  "audioScrollMode": "volume",
   "clockCompactMode": false,
   "focusedWindowCompactMode": false,
   "runningAppsCompactMode": true,
@@ -142,8 +144,6 @@
   "appLauncherGridColumns": 4,
   "spotlightCloseNiriOverview": true,
   "niriOverviewOverlayEnabled": true,
-  "weatherLocation": "New York, NY",
-  "weatherCoordinates": "40.7128,-74.0060",
   "useAutoLocation": true,
   "weatherEnabled": true,
   "networkPreference": "wifi",
@@ -176,9 +176,9 @@
   "acSuspendTimeout": 0,
   "acSuspendBehavior": 0,
   "acProfileName": "",
-  "batteryMonitorTimeout": 0,
-  "batteryLockTimeout": 0,
-  "batterySuspendTimeout": 0,
+  "batteryMonitorTimeout": 120,
+  "batteryLockTimeout": 300,
+  "batterySuspendTimeout": 900,
   "batterySuspendBehavior": 0,
   "batteryProfileName": "",
   "batteryChargeLimit": 100,
@@ -186,6 +186,8 @@
   "loginctlLockIntegration": true,
   "fadeToLockEnabled": false,
   "fadeToLockGracePeriod": 5,
+  "fadeToDpmsEnabled": false,
+  "fadeToDpmsGracePeriod": 5,
   "launchPrefix": "",
   "brightnessDevicePins": {},
   "wifiNetworkPins": {},
@@ -247,6 +249,12 @@
   "notificationTimeoutNormal": 5000,
   "notificationTimeoutCritical": 0,
   "notificationPopupPosition": 0,
+  "notificationHistoryEnabled": true,
+  "notificationHistoryMaxCount": 50,
+  "notificationHistoryMaxAgeDays": 7,
+  "notificationHistorySaveLow": true,
+  "notificationHistorySaveNormal": true,
+  "notificationHistorySaveCritical": true,
   "osdAlwaysShowValue": false,
   "osdPosition": 5,
   "osdVolumeEnabled": true,
@@ -520,8 +528,8 @@
       },
       "positions": {
         "eDP-1": {
-          "x": 50,
-          "y": 100,
+          "x": 93.95703125,
+          "y": 82.91796875,
           "width": 200,
           "height": 200
         }
@@ -533,7 +541,7 @@
       "name": "System Monitor",
       "enabled": true,
       "config": {
-        "showHeader": false,
+        "showHeader": true,
         "transparency": 0,
         "colorMode": "primary",
         "customColor": "#ffffff",
@@ -551,7 +559,7 @@
         "topProcessCount": 5,
         "topProcessSortBy": "memory",
         "layoutMode": "auto",
-        "graphInterval": 60,
+        "graphInterval": 300,
         "displayPreferences": [
           "all"
         ]
@@ -588,22 +596,72 @@
       "id": "dw_1766999862712_wmq2de423",
       "widgetType": "dankDesktopWeather",
       "name": "Dank Desktop Weather",
-      "enabled": false,
+      "enabled": true,
       "config": {
         "displayPreferences": [
           "all"
         ],
-        "viewMode": "forecast"
+        "viewMode": "detailed",
+        "showOnOverlay": false,
+        "showOnOverview": false
       },
       "positions": {
         "eDP-1": {
-          "x": 100,
-          "y": 600,
-          "width": 350,
-          "height": 350
+          "x": 59.2265625,
+          "y": 316.1484375,
+          "width": 280,
+          "height": 320
+        }
+      }
+    },
+    {
+      "id": "dw_1767720221577_j0bk8yog5",
+      "widgetType": "desktopCommand",
+      "name": "Desktop Command",
+      "enabled": true,
+      "config": {
+        "displayPreferences": [
+          "all"
+        ],
+        "command": "fastfetch",
+        "autoRefresh": true,
+        "commandTimeout": "1",
+        "refreshInterval": "5"
+      },
+      "positions": {
+        "eDP-1": {
+          "x": 750,
+          "y": 150,
+          "width": 1000,
+          "height": 500
+        }
+      }
+    },
+    {
+      "id": "dw_1767720224912_hwbyvwsr6",
+      "widgetType": "appShortcut",
+      "name": "Application Shortcut",
+      "enabled": true,
+      "config": {
+        "displayPreferences": [
+          "all"
+        ],
+        "showOnOverview": false,
+        "shortcutApp": "Where Winds Meet",
+        "drawOutlines": false,
+        "backgroundOpacity": 0,
+        "followTheme": false,
+        "drawBorder": false
+      },
+      "positions": {
+        "eDP-1": {
+          "x": 750,
+          "y": 800,
+          "width": 100,
+          "height": 100
         }
       }
     }
   ],
-  "configVersion": 4
+  "configVersion": 5
 }
