@@ -1,7 +1,8 @@
+source /usr/share/cachyos-fish-config/cachyos-config.fish
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
-
 # source /home/tduckie/External/Libraries/miniconda3/etc/fish/conf.d/conda.fish
 
 # >>> conda initialize >>>
@@ -35,3 +36,5 @@ end
 #     return $last_status
 # end
 # <<< distrobox prompt >>
+
+fish_add_path /home/tduckie/.spicetify
