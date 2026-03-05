@@ -423,7 +423,7 @@ DesktopPluginComponent {
                         visible: root.showWind
                         icon: "air"
                         label: I18n.tr("Wind")
-                        value: root.weather.wind || "--"
+                        value: { SettingsData.windSpeedUnit; SettingsData.useFahrenheit; return WeatherService.formatSpeed(root.weather.wind) || "--"; }
                         accentColor: root.accentColor
                         textColor: root.textColor
                         dimColor: root.dimColor
@@ -539,7 +539,7 @@ DesktopPluginComponent {
                     WeatherMetric {
                         visible: root.showWind
                         icon: "air"
-                        value: root.weather.wind || "--"
+                        value: { SettingsData.windSpeedUnit; SettingsData.useFahrenheit; return WeatherService.formatSpeed(root.weather.wind) || "--"; }
                         accentColor: root.accentColor
                         textColor: root.textColor
                         dimColor: root.dimColor

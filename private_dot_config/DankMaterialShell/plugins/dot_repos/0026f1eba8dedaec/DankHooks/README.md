@@ -9,6 +9,7 @@
 | **Wallpaper Changed** | When wallpaper changes | `onWallpaperChanged` | Wallpaper file path |
 | **Light/Dark Mode Changed** | When switching between modes | `onLightModeChanged` | `light` or `dark` |
 | **Theme Changed** | When color theme changes | `onThemeChanged` | Theme name (e.g., `blue`, `red`, `dynamic`) |
+| **Matugen Completed** | When matugen finishes generating colors | `onMatugenCompleted` | `<mode>:<result>` (e.g., `dark:success`, `light:no-changes`, `dark:error`) |
 | **Night Mode Changed** | When night mode toggles | `onNightModeChanged` | `enabled` or `disabled` |
 
 ### Power & Battery
@@ -18,6 +19,8 @@
 | **Battery Level Changed** | When battery percentage changes | `onBatteryLevelChanged` | Battery percentage (0-100) |
 | **Battery Charging State Changed** | When charging state changes | `onBatteryChargingChanged` | `charging` or `not-charging` |
 | **Power Adapter Changed** | When power adapter connects/disconnects | `onBatteryPluggedInChanged` | `plugged-in` or `on-battery` |
+| **Session Locked** | When session becomes locked | `onSessionLocked` | `locked` |
+| **Session Unlocked** | When session becomes unlocked | `onSessionUnlocked` | `unlocked` |
 
 ### Network
 

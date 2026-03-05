@@ -14,3 +14,5 @@ source /usr/share/cachyos-zsh-config/cachyos-config.zsh
 export PATH="$PATH:/home/tduckie/.lmstudio/bin"
 # End of LM Studio CLI section
 
+# direnv hook
+eval "$(direnv hook zsh)"

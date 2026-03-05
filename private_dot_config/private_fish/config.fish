@@ -38,3 +38,5 @@ end
 # <<< distrobox prompt >>
 
 fish_add_path /home/tduckie/.spicetify
+
+direnv hook fish | source

@@ -14,12 +14,14 @@
   },
   "webSearch": {
     "enabled": true,
-    "trigger": "?",
+    "trigger": "search:",
     "noTrigger": false,
     "searchEngines": []
   },
   "emojiLauncher": {
-    "enabled": true
+    "enabled": true,
+    "trigger": "emoji:",
+    "noTrigger": false
   },
   "dockerManager": {
     "enabled": true
@@ -58,6 +60,45 @@
     "enabled": true
   },
   "dankHooks": {
+    "enabled": true
+  },
+  "dankLauncherKeys": {
+    "enabled": true,
+    "trigger": "bind:",
+    "providers": [
+      "niri"
+    ]
+  },
+  "powerUsagePlugin": {
+    "enabled": false,
+    "refreshInterval": 2
+  },
+  "hyprlandSubmap": {
+    "enabled": true
+  },
+  "nixMonitor": {
+    "enabled": true
+  },
+  "dmsLenovoBatterySettings": {
+    "enabled": true,
+    "refreshInterval": 1
+  },
+  "lyricsOnPanel": {
+    "enabled": true
+  },
+  "dankGifSearch": {
+    "enabled": true,
+    "trigger": "gif: "
+  },
+  "dankKDEConnect": {
+    "enabled": true,
+    "selectedDeviceId": "c62a6477_c507_4dd9_8dd6_c298cac1966c"
+  },
+  "dankStickerSearch": {
+    "enabled": true,
+    "trigger": "sticker: "
+  },
+  "chineseCalendar": {
     "enabled": true
   }
 }

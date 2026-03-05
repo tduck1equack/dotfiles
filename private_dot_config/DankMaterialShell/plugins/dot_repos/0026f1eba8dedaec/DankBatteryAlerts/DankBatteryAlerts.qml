@@ -1,7 +1,5 @@
 import QtQuick
-import Quickshell
 import Quickshell.Io
-import qs.Common
 import qs.Services
 import qs.Modules.Plugins
 
@@ -22,47 +20,37 @@ PluginComponent {
     property bool warningAlertSent: false
 
     Component.onCompleted: {
-        console.log("DankBatteryAlerts: Started monitoring battery level")
-        console.log("DankBatteryAlerts: Critical alerts:", enableCriticalAlert, "at", criticalThreshold + "%")
-        console.log("DankBatteryAlerts: Warning alerts:", enableWarningAlert, "at", warningThreshold + "%")
+        console.log("DankBatteryAlerts: Started monitoring battery level");
+        console.log("DankBatteryAlerts: Critical alerts:", enableCriticalAlert, "at", criticalThreshold + "%");
+        console.log("DankBatteryAlerts: Warning alerts:", enableWarningAlert, "at", warningThreshold + "%");
     }
 
     Connections {
         target: BatteryService.batteryAvailable ? BatteryService : null
 
         function onBatteryLevelChanged() {
-            const level = BatteryService.batteryLevel
-            const isCharging = BatteryService.isCharging
+            const level = BatteryService.batteryLevel;
+            const isCharging = BatteryService.isCharging;
 
             if (isCharging) {
-                criticalAlertSent = false
-                warningAlertSent = false
-                return
+                criticalAlertSent = false;
+                warningAlertSent = false;
+                return;
             }
 
             if (enableCriticalAlert && level <= criticalThreshold && !criticalAlertSent) {
-                sendNotification(
-                    criticalTitle,
-                    criticalMessage.replace("${level}", level),
-                    "critical",
-                    "battery_alert"
-                )
-                criticalAlertSent = true
+                sendNotification(criticalTitle, criticalMessage.replace("${level}", level), "critical", "material:battery_alert");
+                criticalAlertSent = true;
             } else if (enableWarningAlert && level <= warningThreshold && !warningAlertSent && !criticalAlertSent) {
-                sendNotification(
-                    warningTitle,
-                    warningMessage.replace("${level}", level),
-                    "normal",
-                    "battery_std"
-                )
-                warningAlertSent = true
+                sendNotification(warningTitle, warningMessage.replace("${level}", level), "normal", "material:battery_0_bar");
+                warningAlertSent = true;
             }
 
             if (level > warningThreshold) {
-                warningAlertSent = false
+                warningAlertSent = false;
             }
             if (level > criticalThreshold) {
-                criticalAlertSent = false
+                criticalAlertSent = false;
             }
         }
     }
@@ -73,8 +61,8 @@ PluginComponent {
             notifyMessage: message,
             notifyUrgency: urgency,
             notifyIcon: icon
-        })
-        process.running = true
+        });
+        process.running = true;
     }
 
     Component {
@@ -86,25 +74,18 @@ PluginComponent {
             property string notifyUrgency: "normal"
             property string notifyIcon: "battery_alert"
 
-            command: [
-                "notify-send",
-                "-a", "DankMaterialShell",
-                "-i", notifyIcon,
-                "-u", notifyUrgency,
-                notifyTitle,
-                notifyMessage
-            ]
+            command: ["notify-send", "-a", "DankMaterialShell", "-i", notifyIcon, "-u", notifyUrgency, notifyTitle, notifyMessage]
 
-            onExited: (exitCode) => {
+            onExited: exitCode => {
                 if (exitCode !== 0) {
-                    console.error("DankBatteryAlerts: notify-send failed with code:", exitCode)
+                    console.error("DankBatteryAlerts: notify-send failed with code:", exitCode);
                 }
-                destroy()
+                destroy();
             }
         }
     }
 
     Component.onDestruction: {
-        console.log("DankBatteryAlerts: Stopped monitoring battery level")
+        console.log("DankBatteryAlerts: Stopped monitoring battery level");
     }
 }
