@@ -111,5 +111,8 @@
   "musicLyrics": {
     "enabled": true,
     "musixmatchToken": "2603134031779808359e2837512b72f4137a3f4647b7ee695ee060"
+  },
+  "dankClight": {
+    "enabled": true
   }
 }

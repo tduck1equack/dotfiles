@@ -28,6 +28,7 @@
   "mangoLayoutRadiusOverride": -1,
   "mangoLayoutBorderSize": -1,
   "firstDayOfWeek": -1,
+  "showWeekNumber": false,
   "use24HourClock": true,
   "showSeconds": false,
   "padHours12Hour": false,
@@ -250,7 +251,7 @@
   "dankLauncherV2BorderColor": "outline",
   "dankLauncherV2ShowFooter": true,
   "dankLauncherV2UnloadOnClose": false,
-  "useAutoLocation": false,
+  "useAutoLocation": true,
   "weatherEnabled": true,
   "networkPreference": "wifi",
   "iconTheme": "Papirus-Dark",
@@ -311,7 +312,11 @@
   "fadeToDpmsGracePeriod": 5,
   "launchPrefix": "",
   "brightnessDevicePins": {},
-  "wifiNetworkPins": {},
+  "wifiNetworkPins": {
+    "preferredWifi": [
+      "tducky"
+    ]
+  },
   "bluetoothDevicePins": {},
   "audioInputDevicePins": {},
   "audioOutputDevicePins": {},
@@ -319,6 +324,10 @@
   "qtThemingEnabled": false,
   "syncModeWithPortal": true,
   "terminalsAlwaysDark": false,
+  "muxType": "tmux",
+  "muxUseCustomCommand": false,
+  "muxCustomCommand": "",
+  "muxSessionFilter": "",
   "runDmsMatugenTemplates": true,
   "matugenTemplateGtk": true,
   "matugenTemplateNiri": true,
@@ -342,6 +351,16 @@
   "matugenTemplateVscode": false,
   "matugenTemplateEmacs": false,
   "matugenTemplateZed": true,
+  "matugenTemplateNeovimSettings": {
+    "dark": {
+      "baseTheme": "tokyonight",
+      "harmony": 0.5
+    },
+    "light": {
+      "baseTheme": "github_light",
+      "harmony": 0.5
+    }
+  },
   "showDock": true,
   "dockAutoHide": false,
   "dockSmartAutoHide": true,
@@ -495,6 +514,10 @@
         },
         {
           "id": "dmsLenovoBatterySettings",
+          "enabled": true
+        },
+        {
+          "id": "privacyIndicator",
           "enabled": true
         },
         {
@@ -701,6 +724,9 @@
     "eDP-1": {
       "size": 50,
       "enabled": true
+    },
+    "eDP-2": {
+      "enabled": true
     }
   },
   "desktopWidgetInstances": [
@@ -730,6 +756,12 @@
           "y": 100,
           "width": 200,
           "height": 200
+        },
+        "eDP-2": {
+          "width": 200,
+          "height": 200,
+          "x": 40,
+          "y": 80
         }
       }
     },
@@ -771,6 +803,12 @@
           "y": 550,
           "width": 400,
           "height": 450
+        },
+        "eDP-2": {
+          "width": 360,
+          "height": 520,
+          "x": 1640,
+          "y": 80
         }
       }
     },
@@ -790,6 +828,12 @@
           "y": 122.140625,
           "width": 320,
           "height": 160
+        },
+        "eDP-2": {
+          "width": 320,
+          "height": 200,
+          "x": 693.5,
+          "y": 433.5
         }
       }
     },
@@ -817,6 +861,12 @@
           "y": 50,
           "width": 400,
           "height": 450
+        },
+        "eDP-2": {
+          "width": 360,
+          "height": 440,
+          "x": 1640,
+          "y": 760
         }
       }
     },
@@ -841,6 +891,12 @@
           "y": 100,
           "width": 950,
           "height": 550
+        },
+        "eDP-2": {
+          "width": 200,
+          "height": 200,
+          "x": 753.5,
+          "y": 433.5
         }
       }
     },
@@ -866,6 +922,12 @@
           "y": 300,
           "width": 100,
           "height": 100
+        },
+        "eDP-2": {
+          "width": 200,
+          "height": 200,
+          "x": 753.5,
+          "y": 433.5
         }
       }
     },
@@ -891,6 +953,12 @@
           "y": 300,
           "width": 100,
           "height": 100
+        },
+        "eDP-2": {
+          "width": 200,
+          "height": 200,
+          "x": 753.5,
+          "y": 433.5
         }
       }
     },
@@ -916,6 +984,12 @@
           "y": 400,
           "width": 100,
           "height": 100
+        },
+        "eDP-2": {
+          "width": 200,
+          "height": 200,
+          "x": 753.5,
+          "y": 433.5
         }
       }
     },
@@ -941,6 +1015,12 @@
           "y": 500,
           "width": 100,
           "height": 100
+        },
+        "eDP-2": {
+          "width": 200,
+          "height": 200,
+          "x": 753.5,
+          "y": 433.5
         }
       }
     },
@@ -966,6 +1046,12 @@
           "y": 400,
           "width": 100,
           "height": 100
+        },
+        "eDP-2": {
+          "width": 200,
+          "height": 200,
+          "x": 753.5,
+          "y": 433.5
         }
       }
     },
@@ -991,6 +1077,12 @@
           "y": 500,
           "width": 100,
           "height": 100
+        },
+        "eDP-2": {
+          "width": 200,
+          "height": 200,
+          "x": 753.5,
+          "y": 433.5
         }
       }
     },
@@ -1024,6 +1116,12 @@
           "y": 0.4074074074074074,
           "width": 200,
           "height": 200
+        },
+        "eDP-2": {
+          "width": 200,
+          "height": 200,
+          "x": 753.5,
+          "y": 433.5
         }
       }
     },
@@ -1047,6 +1145,12 @@
           "height": 250,
           "x": 1500,
           "y": 250
+        },
+        "eDP-2": {
+          "width": 200,
+          "height": 200,
+          "x": 753.5,
+          "y": 433.5
         }
       }
     },
@@ -1068,6 +1172,12 @@
           "height": 1000,
           "x": 50,
           "y": 50
+        },
+        "eDP-2": {
+          "width": 200,
+          "height": 200,
+          "x": 753.5,
+          "y": 433.5
         }
       }
     }
@@ -1085,5 +1195,5 @@
     }
   },
   "launcherPluginOrder": [],
-  "configVersion": 6
+  "configVersion": 5
 }

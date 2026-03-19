@@ -10,14 +10,17 @@ Rectangle {
 
     property var parentPopout: null
     property int listHeight: 280
+    property string shareDeviceId: ""
 
-    implicitHeight: 32 + 1 + listHeight + Theme.spacingS * 4 + Theme.spacingM * 2
+    implicitHeight: contentColumn.implicitHeight + Theme.spacingM * 2
     radius: Theme.cornerRadius
     color: Theme.withAlpha(Theme.surfaceContainerHigh, Theme.popupTransparency)
 
     Column {
         id: contentColumn
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
         anchors.margins: Theme.spacingM
         spacing: Theme.spacingS
 
@@ -147,6 +150,7 @@ Rectangle {
 
                     property var device: PhoneConnectService.getDevice(modelData)
                     property bool canControl: device?.isReachable && device?.isPaired
+                    property bool isShareTarget: root.shareDeviceId === modelData
 
                     width: deviceListView.width
                     height: contentCol.implicitHeight + Theme.spacingM * 2
@@ -241,6 +245,14 @@ Rectangle {
                                         anchors.verticalCenter: parent.verticalCenter
                                     }
                                 }
+
+                                DankIcon {
+                                    visible: PhoneConnectService.getNetworkIcon(device) !== ""
+                                    name: PhoneConnectService.getNetworkIcon(device)
+                                    size: Theme.iconSize - 4
+                                    color: Theme.surfaceVariantText
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
                             }
                         }
 
@@ -287,6 +299,19 @@ Rectangle {
                                             return;
                                         ToastService.showInfo(I18n.tr("Clipboard sent", "KDE Connect clipboard action"));
                                     });
+                                }
+                            }
+
+                            DankActionButton {
+                                iconName: "share"
+                                iconColor: Theme.primary
+                                buttonSize: 36
+                                tooltipText: I18n.tr("Share", "KDE Connect share tooltip")
+                                onClicked: {
+                                    if (deviceDelegate.isShareTarget)
+                                        root.shareDeviceId = "";
+                                    else
+                                        root.shareDeviceId = modelData;
                                 }
                             }
 
@@ -369,14 +394,41 @@ Rectangle {
                                 onClicked: PhoneConnectService.requestPairing(modelData)
                             }
                         }
+
+                        ShareDialog {
+                            visible: deviceDelegate.isShareTarget
+                            width: parent.width
+                            deviceId: modelData
+                            parentPopout: root.parentPopout
+                            onClose: root.shareDeviceId = ""
+                            onShare: (content, isUrl) => {
+                                function handleResponse(response) {
+                                    if (response.error) {
+                                        ToastService.showError(I18n.tr("Failed to share", "Phone Connect error"), response.error);
+                                        return;
+                                    }
+                                    ToastService.showInfo(I18n.tr("Shared", "Phone Connect share success"));
+                                }
+                                if (isUrl)
+                                    PhoneConnectService.shareUrl(modelData, content, handleResponse);
+                                else
+                                    PhoneConnectService.shareText(modelData, content, handleResponse);
+                                root.shareDeviceId = "";
+                            }
+                            onShareFile: path => {
+                                PhoneConnectService.shareUrl(modelData, "file://" + path, response => {
+                                    if (response.error) {
+                                        ToastService.showError(I18n.tr("Failed to send file", "Phone Connect error"), response.error);
+                                        return;
+                                    }
+                                    ToastService.showInfo(I18n.tr("Sending", "Phone Connect file send") + " " + path.split("/").pop() + "...");
+                                });
+                                root.shareDeviceId = "";
+                            }
+                        }
                     }
                 }
             }
-        }
-
-        Item {
-            width: 1
-            height: Theme.spacingS
         }
     }
 }

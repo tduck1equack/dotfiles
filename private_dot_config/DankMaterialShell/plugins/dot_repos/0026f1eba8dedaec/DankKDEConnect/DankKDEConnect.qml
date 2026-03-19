@@ -41,9 +41,12 @@ PluginComponent {
     }
     ccWidgetIsActive: hasDevice && selectedDevice?.isReachable
 
+    ccDetailHeight: 350
+    onCcWidgetExpanded: PhoneConnectService.detectBackend()
+
     ccDetailContent: Component {
         KDEConnectDetailContent {
-            listHeight: 200
+            listHeight: 300
         }
     }
 
@@ -115,8 +118,13 @@ PluginComponent {
             });
             break;
         case "share":
-            shareDeviceId = deviceId;
-            showShareDialog = true;
+            if (showShareDialog && shareDeviceId === deviceId) {
+                showShareDialog = false;
+                shareDeviceId = "";
+            } else {
+                shareDeviceId = deviceId;
+                showShareDialog = true;
+            }
             break;
         case "sms":
             closePopout();
@@ -273,6 +281,8 @@ PluginComponent {
     popoutContent: Component {
         PopoutComponent {
             id: popout
+
+            Component.onCompleted: PhoneConnectService.detectBackend()
 
             headerText: root.serviceName
             detailsText: PhoneConnectService.connectedCount + " connected • " + PhoneConnectService.pairedCount + " paired"
