@@ -2,41 +2,20 @@ source /usr/share/cachyos-fish-config/cachyos-config.fish
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
+    #
+    # Adding SSH keys on system to keychain
+    keychain --eval --quiet ~/External/.ssh/id_ed25519_20260316_github | source
+    keychain --eval --quiet ~/External/.ssh/id_ed25519_20260316_gitlab | source
 end
 # source /home/tduckie/External/Libraries/miniconda3/etc/fish/conf.d/conda.fish
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if test -f /home/tduckie/External/Libraries/miniconda3/bin/conda
-    eval /home/tduckie/External/Libraries/miniconda3/bin/conda "shell.fish" hook $argv | source
-else
-    if test -f "/home/tduckie/External/Libraries/miniconda3/etc/fish/conf.d/conda.fish"
-        . "/home/tduckie/External/Libraries/miniconda3/etc/fish/conf.d/conda.fish"
-    else
-        set -x PATH /home/tduckie/External/Libraries/miniconda3/bin $PATH
-    end
-end
-# <<< conda initialize <<<
-
-# >>> distrobox prompt >>>
-# function fish_prompt
-#     set last_status $status
-#
-#     # Check if we are inside a distrobox (using the standard env var)
-#     if set -q CONTAINER_ID
-#         # Customize the prompt for within the container
-#         echo -n "📦[" (whoami) "@" $CONTAINER_ID "] " (prompt_pwd) "> "
-#     else
-#         # Use the default prompt for the host
-#         # You can replace this with your preferred host prompt
-#         echo -n (whoami) "@" (hostname) " " (prompt_pwd) "> "
-#     end
-#
-#     # Restore the last command's exit status
-#     return $last_status
-# end
-# <<< distrobox prompt >>
-
-fish_add_path /home/tduckie/.spicetify
+set -gx ANDROID_HOME /home/tduckie/External/Libraries/Android/Sdk
+set -gx GOPATH /home/tduckie/External/Libraries/go
 
 direnv hook fish | source
+
+# pnpm
+set -gx PNPM_HOME "/home/tduckie/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end

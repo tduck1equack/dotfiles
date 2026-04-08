@@ -9,6 +9,7 @@
     }
   },
   "matugenScheme": "scheme-tonal-spot",
+  "matugenContrast": 0,
   "runUserMatugenTemplates": true,
   "matugenTargetMonitor": "",
   "popupTransparency": 1,
@@ -52,6 +53,10 @@
   "modalElevationEnabled": true,
   "popoutElevationEnabled": true,
   "barElevationEnabled": false,
+  "blurEnabled": false,
+  "blurBorderColor": "outline",
+  "blurBorderCustomColor": "#ffffff",
+  "blurBorderOpacity": 1,
   "wallpaperFillMode": "Fill",
   "blurredWallpaperLayer": false,
   "blurWallpaperOnOverview": false,
@@ -240,6 +245,7 @@
   "sortAppsAlphabetically": false,
   "appLauncherGridColumns": 4,
   "spotlightCloseNiriOverview": true,
+  "rememberLastQuery": false,
   "spotlightSectionViewModes": {
     "apps": "list"
   },
@@ -361,6 +367,7 @@
       "harmony": 0.5
     }
   },
+  "matugenTemplateNeovimSetBackground": true,
   "showDock": true,
   "dockAutoHide": false,
   "dockSmartAutoHide": true,
@@ -799,8 +806,8 @@
       },
       "positions": {
         "eDP-1": {
-          "x": 1450,
-          "y": 550,
+          "x": 1600,
+          "y": 750,
           "width": 400,
           "height": 450
         },
@@ -857,8 +864,8 @@
       },
       "positions": {
         "eDP-1": {
-          "x": 1450,
-          "y": 50,
+          "x": 1600,
+          "y": 100,
           "width": 400,
           "height": 450
         },
